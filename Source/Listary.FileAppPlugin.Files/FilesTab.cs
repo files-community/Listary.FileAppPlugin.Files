@@ -15,14 +15,16 @@ namespace Listary.FileAppPlugin.Files
 		{
 			_host = host;
 
-			_currentPathGet = Files.FindFirstDescendant(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
+			var _windowContent = Files.FindChildAt(2);
+
+			_currentPathGet = _windowContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
 			if (_currentPathGet == null)
 			{
 				_host.Logger.LogError("Failed to find CurrentPathGet");
 				return;
 			}
 
-			_currentPathSet = Files.FindFirstDescendant(cf => cf.ByAutomationId("CurrentPathSet"))?.AsTextBox();
+			_currentPathSet = _windowContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathSet"))?.AsTextBox();
 			if (_currentPathSet == null)
 			{
 				_host.Logger.LogError("Failed to find CurrentPathSet");
