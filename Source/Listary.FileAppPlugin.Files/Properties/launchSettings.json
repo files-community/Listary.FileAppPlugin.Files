@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Listary.FileAppPlugin.Files": {
+      "commandName": "Project"
+    },
+    "Debug with dev tools": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Listary\\Listary.FileAppPlugin.DevTools.exe"
+    }
+  }
+}
