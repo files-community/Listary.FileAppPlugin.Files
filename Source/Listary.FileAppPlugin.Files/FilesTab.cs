@@ -15,7 +15,8 @@ namespace Listary.FileAppPlugin.Files
 		{
 			_host = host;
 
-			var _windowContent = Files.FindChildAt(2);
+			// Find window content to reduce the scope
+			var _windowContent = Files.FindFirstChild(cf => cf.ByClassName("Microsoft.UI.Content.DesktopChildSiteBridge"));
 
 			_currentPathGet = _windowContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
 			if (_currentPathGet == null)
