@@ -37,7 +37,7 @@ namespace Listary.FileAppPlugin.Files
                 {
                     var automation = new UIA3Automation();
                     AutomationElement Files = automation.FromHandle(hWnd);
-                    if (Files.Name.Contains("- Files"))
+                    if (Files.Name == "Files" || Files.Name.Contains("- Files"))
                     {
                         return new FilesWindow(_host, hWnd, automation, Files);
                     }
