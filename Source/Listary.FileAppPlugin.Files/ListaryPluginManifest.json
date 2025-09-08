@@ -3,7 +3,7 @@
 
   "Id": "Files",
   "PluginType": "FileAppPlugin",
-  "PluginVersion": "0.1.0",
+  "PluginVersion": "0.2.0",
   "DisplayName": "Files",
   "Authors": [ "Files" ],
   "Description": "Listary file application plugin for Files.",
