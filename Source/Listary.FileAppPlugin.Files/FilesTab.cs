@@ -15,22 +15,24 @@ namespace Listary.FileAppPlugin.Files
 		{
 			_host = host;
 
-			// Find window content to reduce the scope
+			// Find window content to reduce the scope (Files v3 and earlier)
 			var _windowContent = Files.FindFirstChild(cf => cf.ByClassName("Microsoft.UI.Content.DesktopChildSiteBridge"));
-			var _paneContent = _windowContent.FindFirstChild(cf => cf.ByClassName("InputSiteWindowClass"));
+			_currentPathGet ??= _windowContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
+			_currentPathSet ??= _windowContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathSet"))?.AsTextBox();
 
-			_currentPathGet = _paneContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
+			// Find pane content to reduce the scope (Files v4 and later)
+			var _paneContent = _windowContent.FindFirstChild(cf => cf.ByClassName("InputSiteWindowClass"));
+			_currentPathGet ??= _paneContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathGet"))?.AsTextBox();
+			_currentPathSet ??= _paneContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathSet"))?.AsTextBox();
+
+			// Final check (in case the structure changes in future versions)
 			if (_currentPathGet == null)
 			{
 				_host.Logger.LogError("Failed to find CurrentPathGet");
-				return;
 			}
-
-			_currentPathSet = _paneContent.FindFirstChild(cf => cf.ByAutomationId("CurrentPathSet"))?.AsTextBox();
 			if (_currentPathSet == null)
 			{
 				_host.Logger.LogError("Failed to find CurrentPathSet");
-				return;
 			}
 		}
 
